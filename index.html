@@ -394,8 +394,8 @@
         <div class="q-number">問題 06 / 09</div>
         <h2 class="q-title">你為什麼把前 3 名排在最前面？<span class="required">*</span></h2>
         <p class="q-hint">請說明你剛剛排序前 3 名的原因。可以說明這些資訊如何影響你的判斷，例如能不能推薦、能不能說服客人、能不能比較產品差異、能不能判斷風險、能不能確認是否可售。</p>
-        <textarea class="textarea" id="q6-text" placeholder="我把這幾類資訊排在前面，是因為……" maxlength="800"></textarea>
-        <div class="error-msg hidden" id="q6-error">請填寫至少 10 個字</div>
+        <textarea class="textarea" id="q6-text" placeholder="我把這幾類資訊排在前面，是因為……"></textarea>
+        <div class="error-msg hidden" id="q6-error">請填寫內容</div>
       </div>
     </div>
 
@@ -487,7 +487,7 @@
   /*  CONFIG                                                       */
   /* ============================================================ */
   const GAS_URL = 'https://script.google.com/macros/s/AKfycby6ibP9IAXgyQkyZuMXhfIAZ23NfFuSc1as_7_xTvsTRQ5j8xRhClwyFJQXTdGSolNQ/exec';
-  const STORAGE_KEY = 'lion_product_survey_v3';
+  const STORAGE_KEY = 'lion_product_survey_v3_1';
   const TOTAL_Q = 9;
 
   /* ============================================================ */
@@ -865,7 +865,7 @@
       case 3: return state.q3 && (state.q3 !== '其他' || state.q3Other.trim());
       case 4: return state.q4 && (state.q4 !== '其他' || state.q4Other.trim());
       case 5: return state.q5.length === 5;
-      case 6: return state.q6.trim().length >= 10;
+      case 6: return state.q6.trim().length >= 1;
       case 7: return state.q5.length === 5 && state.q5.every(id => !!state.q7[id]);
       case 8: return state.q8 && (state.q8 !== '其他' || state.q8Other.trim());
       case 9: return state.q9 && (state.q9 !== '其他' || state.q9Other.trim());
@@ -973,7 +973,7 @@
       submittedAt: new Date().toISOString(),
       durationMs:  Date.now() - startTime,
       userAgent:   navigator.userAgent.slice(0, 200),
-      schemaVersion: 'v3',
+      schemaVersion: 'v3.1',
 
       q1: state.q1.join('｜'),
       q1Other: state.q1Other.trim(),
@@ -984,11 +984,6 @@
       q4: state.q4 || '',
       q4Other: state.q4Other.trim(),
 
-      q5_rank1_id: state.q5[0] || '',
-      q5_rank2_id: state.q5[1] || '',
-      q5_rank3_id: state.q5[2] || '',
-      q5_rank4_id: state.q5[3] || '',
-      q5_rank5_id: state.q5[4] || '',
       q5_rank1_title: q5Titles[0] || '',
       q5_rank2_title: q5Titles[1] || '',
       q5_rank3_title: q5Titles[2] || '',
